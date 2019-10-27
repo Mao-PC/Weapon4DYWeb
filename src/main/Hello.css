@@ -1,0 +1,14 @@
+.logo {
+    width: 120px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.2);
+    margin: 5px 28px 2px 16px;
+    float: left;
+}
+
+.ant-layout-header {
+    height: 64px;
+    padding: 0 50px;
+    line-height: 64px;
+    background: #f0f2f5;
+}
