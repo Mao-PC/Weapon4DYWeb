@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 
 import './App.css';
-
-import Hello from './main/index';
+import Hello from './main/layout';
 
 class App extends Component {
     render() {
