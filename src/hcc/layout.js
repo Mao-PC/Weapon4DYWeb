@@ -1,84 +1,112 @@
-import React, { Component } from 'react';
-import { Layout, Menu, Breadcrumb, Icon } from 'antd';
+/* eslint-disable */
+import React, { Component } from "react";
+import { Layout, Menu } from "antd";
 
 const { SubMenu } = Menu;
-const { Header, Content, Footer, Sider } = Layout;
+const { Header, Content, Sider } = Layout;
+
+import "./Layout.css";
 
 export default class Hello extends Component {
-    render() {
-        return (
-            <Layout>
-                <Header className="header">
-                    <div className="logo" />
-                    <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']} style={{ lineHeight: '64px' }}>
-                        <Menu.Item key="1">nav 1</Menu.Item>
-                        <Menu.Item key="2">nav 2</Menu.Item>
-                        <Menu.Item key="3">nav 3</Menu.Item>
-                    </Menu>
-                </Header>
-                <Content style={{ padding: '0 50px' }}>
-                    <Breadcrumb style={{ margin: '16px 0' }}>
-                        <Breadcrumb.Item>Home</Breadcrumb.Item>
-                        <Breadcrumb.Item>List</Breadcrumb.Item>
-                        <Breadcrumb.Item>App</Breadcrumb.Item>
-                    </Breadcrumb>
-                    <Layout style={{ padding: '24px 0', background: '#fff' }}>
-                        <Sider width={200} style={{ background: '#fff' }}>
-                            <Menu
-                                mode="inline"
-                                defaultSelectedKeys={['1']}
-                                defaultOpenKeys={['sub1']}
-                                style={{ height: '100%' }}
-                            >
-                                <SubMenu
-                                    key="sub1"
-                                    title={
-                                        <span>
-                                            <Icon type="user" />
-                                            subnav 1
-                                        </span>
-                                    }
-                                >
-                                    <Menu.Item key="1">option1</Menu.Item>
-                                    <Menu.Item key="2">option2</Menu.Item>
-                                    <Menu.Item key="3">option3</Menu.Item>
-                                    <Menu.Item key="4">option4</Menu.Item>
-                                </SubMenu>
-                                <SubMenu
-                                    key="sub2"
-                                    title={
-                                        <span>
-                                            <Icon type="laptop" />
-                                            subnav 2
-                                        </span>
-                                    }
-                                >
-                                    <Menu.Item key="5">option5</Menu.Item>
-                                    <Menu.Item key="6">option6</Menu.Item>
-                                    <Menu.Item key="7">option7</Menu.Item>
-                                    <Menu.Item key="8">option8</Menu.Item>
-                                </SubMenu>
-                                <SubMenu
-                                    key="sub3"
-                                    title={
-                                        <span>
-                                            <Icon type="notification" />
-                                            subnav 3
-                                        </span>
-                                    }
-                                >
-                                    <Menu.Item key="9">option9</Menu.Item>
-                                    <Menu.Item key="10">option10</Menu.Item>
-                                    <Menu.Item key="11">option11</Menu.Item>
-                                    <Menu.Item key="12">option12</Menu.Item>
-                                </SubMenu>
-                            </Menu>
-                        </Sider>
-                        <Content style={{ padding: '0 24px', minHeight: 280 }}>Content</Content>
-                    </Layout>
-                </Content>
-                <Footer style={{ textAlign: 'center' }}>GitHub 请访问 https://github.com/Mao-PC/Weapon4DYWeb</Footer>
-            </Layout>
-        );
+  constructor(props) {
+    super(props);
+    this.indexs = [
+      "medical_institution_management",
+      "project_agreement_management",
+      "cooperation_project_agreement",
+      "monthly_report",
+      "statistical_analysis",
+      "system_management",
+      "organization",
+      "role_permissions",
+      "user_management",
+      "data_dictionary",
+      "operation_log",
+      "change_Password"
+    ];
+    this.rootSubmenuKeys = ["0", "1", "5"];
+    this.nodes = [];
+    this.state = {
+      openKeys: ["0"],
+      cIndex: null,
+      liStyle: {}
+    };
+  }
+
+  onSelect = (k, item) => {
+    let cSelectedKey = "0";
+    if (k == "submenu") {
+      const latestOpenKey = item.find(
+        key => this.state.openKeys.indexOf(key) === -1
+      );
+      if (this.rootSubmenuKeys.indexOf(latestOpenKey) === -1) {
+        this.setState({ openKeys: item });
+      } else {
+        this.setState({
+          openKeys: latestOpenKey ? [latestOpenKey] : []
+        });
+      }
+      cSelectedKey = this.state.openKeys[0];
+    } else if (k == "menuitem") {
+      cSelectedKey = item.key;
     }
+    cSelectedKey = cSelectedKey ? cSelectedKey : 0;
+    console.log(cSelectedKey);
+  };
+
+  render() {
+    const uls = [
+      "医疗机构管理",
+      "项目协议管理",
+      "合作项目协议",
+      "月报",
+      "统计分析",
+      "系统管理",
+      "角色权限",
+      "组织机构",
+      "用户管理",
+      "数据字典",
+      "操作日志",
+      "修改密码"
+    ];
+    this.nodes = uls.map((content, i) => {
+      let classNames = "menu-item";
+      if (![0, 1, 5].includes(i)) {
+        classNames = "menu-item menu-item-sub";
+      }
+      return (
+        <li
+          className={
+            this.state.cIndex === i ? classNames : classNames + " active"
+          }
+          key={i}
+          onClick={() => {
+            console.log(i);
+            this.setState({
+              cIndex: i
+            });
+          }}
+        >
+          {content}
+        </li>
+      );
+    });
+    return (
+      <Layout style={{ height: "100%" }}>
+        <Header style={{ backgroundColor: "#0099db", height: 80 }}>
+          <div className="title">京津冀医疗卫生协同发展信息动态分析系统</div>
+        </Header>
+        <Content style={{ height: "100%" }}>
+          <Layout style={{ height: "100%" }}>
+            <Sider width={200}>
+              <ul className="menu">{this.nodes}</ul>
+            </Sider>
+            <Content style={{ padding: "0 24px", minHeight: 280 }}>
+              Content
+            </Content>
+          </Layout>
+        </Content>
+      </Layout>
+    );
+  }
 }
