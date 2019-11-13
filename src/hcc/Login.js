@@ -1,7 +1,6 @@
 /* eslint-disable */
 import React, { Component } from "react";
 import { Form, Icon, Input, Button, Checkbox } from "antd";
-// import { Redirect } from "react-router-dom";
 
 import "./Login.css";
 

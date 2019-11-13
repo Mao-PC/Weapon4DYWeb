@@ -1,0 +1,40 @@
+.areaTree {
+  margin: 30px 20px;
+  width: 300px;
+  border: 1px solid;
+  min-height: 90%;
+  float: left;
+}
+
+.listArea {
+  margin: 30px 20px;
+  width: 850px;
+  min-height: 90%;
+  float: left;
+}
+
+.formItem {
+  float: left;
+  margin: 10px 20px;
+}
+
+.spanInput {
+  width: 20px;
+  margin-right: 10px;
+}
+
+.buttonClass {
+  margin: 0 20px;
+}
+
+.add-form-item {
+  width: 60%;
+}
+
+.ant-form-item-label {
+  padding-right: 20px;
+}
+
+.ant-row {
+  margin-bottom: 10px;
+}

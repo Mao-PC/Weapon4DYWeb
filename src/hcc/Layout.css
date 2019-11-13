@@ -109,10 +109,10 @@
     cubic-bezier(0.645, 0.045, 0.355, 1), cubic-bezier(0.645, 0.045, 0.355, 1),
     cubic-bezier(0.645, 0.045, 0.355, 1);
   white-space: nowrap;
-  width: 256px;
+  width: 200px;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
-.menu-item .active {
+.active {
   background-color: rgb(24, 144, 255);
 }
 .menu-item-sub {
