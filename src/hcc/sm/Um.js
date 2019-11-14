@@ -1,20 +1,28 @@
 /* eslint-disable */
 import React, { Component } from "react";
-import { Tree, DatePicker, Select, Input, Button, Table, Divider } from "antd";
+import { Tree, DatePicker, Select, Input, Button, Table, Divider, Checkbox } from "antd";
 
 const { TreeNode } = Tree;
 const { Option } = Select;
 
 import { treeData, deptData, tableData } from "./data";
 
-import Save from "./Save";
+import Save from "./UmSave";
 
-import "./imm-index.css";
+import "./sm-index.css";
 
 export default class List extends Component {
     constructor(props) {
         super(props);
         this.columns = [
+            {
+                title: "选择",
+                dataIndex: "check",
+                key: "check",
+                render: () => {
+                    return <Checkbox />
+                }
+            },
             {
                 title: "ID",
                 dataIndex: "id",
@@ -131,51 +139,31 @@ export default class List extends Component {
                         <Tree onSelect={this.onSelect}>{areaTree}</Tree>
                     </div>
                     <div className="listArea">
-                        <div className="formItem">
-                            <span className="spanInput">创建时间：</span>
-                            <DatePicker
-                                style={{ width: 210 }}
-                                key="createTime"
-                                onChange={(date, dateString) => {
-                                    console.log(date, dateString);
-                                }}
-                            />
-                        </div>
-                        <div className="formItem">
-                            <span className="spanInput">所属行政部门：</span>
-                            <Select
-                                allowClear={true}
-                                style={{ width: 180 }}
-                                onChange={text => console.log(text)}
-                            >
-                                {depts}
-                            </Select>
-                        </div>
-                        <div className="formItem">
-                            <span className="spanInput">医疗机构名称：</span>
-                            <Input
-                                style={{ width: 180 }}
-                                allowClear={true}
-                                onChange={e => console.log(e.target.value)}
-                            />
-                        </div>
-                        <div className="formItem">
-                            <Button type="primary" className="buttonClass">
-                                查询
+                        <div style={{ float: "right", margin: 30 }}>
+                            <Button
+                                type="primary"
+                                className="buttonClass"
+                                onClick={() => this.setState({ pageType: "edit" })}>
+                                添加
                             </Button>
                             <Button
                                 type="primary"
                                 className="buttonClass"
-                                onClick={() => {
-                                    this.setState({ pageType: "add" });
-                                }}
+                                onClick={() => this.setState({ pageType: "add" })}
                             >
-                                添加新机构
+                                修改
+                            </Button>
+                            <Button type="primary" className="buttonClass">
+                                删除
+                            </Button>
+                            <Button type="primary" className="buttonClass">
+                                重置密码
                             </Button>
                         </div>
                         <div className="list-table">
                             <Table
-                                style={{ paddingTop: 200 }}
+                                // bordered
+                                style={{ paddingTop: 50 }}
                                 columns={this.columns}
                                 dataSource={tableData}
                             />

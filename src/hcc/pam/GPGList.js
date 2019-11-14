@@ -6,7 +6,7 @@ const { Option } = Select;
 const { Item } = Form;
 const { RangePicker } = DatePicker;
 
-import './index.css';
+import './pam-index.css';
 
 /**
  * 合作项目协议
